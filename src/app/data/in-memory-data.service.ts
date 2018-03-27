@@ -3,7 +3,7 @@ import { FLIES } from './mock-fly-data'
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const heroes = FLIES;
-    return {heroes};
+    const flies = FLIES;
+    return {flies};
   }
 }

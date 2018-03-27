@@ -1,11 +1,6 @@
-<h3>Top Heroes</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let hero of heroes" class="col-1-4"
-      routerLink="/detail/{{hero.id}}">
-    <div class="module hero">
-      <h4>{{hero.name}}</h4>
-    </div>
-  </a>
-</div>
+<h3>Top Flies</h3>
+<h4>
+  <a *ngFor="let fly of flies" routerLink="/detail/{{fly.id}}">{{fly.name}}</a>
+</h4>
 
-<app-hero-search></app-hero-search>
+<app-fly-search></app-fly-search>

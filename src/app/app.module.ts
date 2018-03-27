@@ -4,16 +4,16 @@ import { FormsModule }    from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+import { InMemoryDataService }  from './data/in-memory-data.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent }         from './app.component';
-import { DashboardComponent }   from './dashboard/dashboard.component';
-import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
-import { HeroesComponent }      from './heroes/heroes.component';
-import { HeroSearchComponent }  from './hero-search/hero-search.component';
-import { HeroService }          from './hero.service';
+import { DashboardComponent }   from './layouts/dashboard/dashboard.component';
+import { FlyDetailComponent }  from './components/fly-detail/fly-detail.component';
+import { FliesComponent }      from './layouts/flies/flies.component';
+import { FlySearchComponent }  from './components/fly-search/fly-search.component';
+import { FlyService }          from './fly.service';
 import { MessageService }       from './message.service';
 import { MessagesComponent }    from './messages/messages.component';
 
@@ -34,12 +34,12 @@ import { MessagesComponent }    from './messages/messages.component';
   declarations: [
     AppComponent,
     DashboardComponent,
-    HeroesComponent,
-    HeroDetailComponent,
+    FliesComponent,
+    FlyDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    FlySearchComponent
   ],
-  providers: [ HeroService, MessageService ],
+  providers: [ FlyService, MessageService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

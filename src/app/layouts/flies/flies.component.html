@@ -1,0 +1,21 @@
+<h2>Grandpa's Flies</h2>
+
+<div>
+  <label>Fly name:
+    <input #flyName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(flyName.value); flyName.value=''">
+    add
+  </button>
+</div>
+
+<ul>
+  <li *ngFor="let fly of flies">
+    <a routerLink="/detail/{{fly.id}}">
+      <span>{{fly.id}}</span> {{fly.name}}
+    </a>
+    <button title="delete fly"
+    (click)="delete(fly)">x</button>
+  </li>
+</ul>
