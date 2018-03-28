@@ -9,13 +9,11 @@ import { InMemoryDataService }  from './data/in-memory-data.service';
 import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent }         from './app.component';
-import { DashboardComponent }   from './layouts/dashboard/dashboard.component';
-import { FlyDetailComponent }  from './components/fly-detail/fly-detail.component';
+import { ListComponent }   from './layouts/list/list.component';
+import { DetailComponent }  from './layouts/detail/detail.component';
 import { FliesComponent }      from './layouts/flies/flies.component';
 import { FlySearchComponent }  from './components/fly-search/fly-search.component';
 import { FlyService }          from './fly.service';
-import { MessageService }       from './message.service';
-import { MessagesComponent }    from './messages/messages.component';
 
 @NgModule({
   imports: [
@@ -33,13 +31,12 @@ import { MessagesComponent }    from './messages/messages.component';
   ],
   declarations: [
     AppComponent,
-    DashboardComponent,
+    ListComponent,
     FliesComponent,
-    FlyDetailComponent,
-    MessagesComponent,
+    DetailComponent,
     FlySearchComponent
   ],
-  providers: [ FlyService, MessageService ],
+  providers: [ FlyService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

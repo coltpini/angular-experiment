@@ -6,11 +6,11 @@ import { Fly }         from '../../data/fly';
 import { FlyService }  from '../../fly.service';
 
 @Component({
-  selector: 'app-fly-detail',
-  templateUrl: './fly-detail.component.html',
-  styleUrls: [ './fly-detail.component.css' ]
+  selector: 'app-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: [ './detail.component.css' ]
 })
-export class FlyDetailComponent implements OnInit {
+export class DetailComponent implements OnInit {
   @Input() fly: Fly;
 
   constructor(
@@ -24,17 +24,12 @@ export class FlyDetailComponent implements OnInit {
   }
 
   getFly(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('id');
     this.flyService.getFly(id)
       .subscribe(fly => this.fly = fly);
   }
 
   goBack(): void {
     this.location.back();
-  }
-
- save(): void {
-    this.flyService.updateFly(this.fly)
-      .subscribe(() => this.goBack());
   }
 }

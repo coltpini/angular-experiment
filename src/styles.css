@@ -1,0 +1,30 @@
+:root {
+    --color-100: RGBA(28, 86, 50, 1.00);
+    --color-200: RGBA(234, 234, 234, 1.00);
+
+    --space-50: 0.2em;
+    --space-100: 1em;
+    --space-200: 2em;
+    --space-300: 4em;
+    --space-400: 16em;
+}
+
+
+body {
+    font-family: Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+main {
+    width: 80%;
+}
+
+a { 
+    text-decoration: none;
+    color: var(--color-100);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+

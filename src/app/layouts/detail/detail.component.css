@@ -1,0 +1,22 @@
+.container {
+    margin: var(--space-300);
+}
+
+.back {
+    cursor: pointer;
+}
+
+ul {
+    margin: 0; 
+    padding: 0; 
+}
+.tag {
+    list-style: none;
+    background: var(--color-100);
+    opacity: 0.8;
+    color: white;
+    display: inline-block;
+    padding: var(--space-50) var(--space-100);
+    border-radius: var(--space-50);
+    margin-right: var(--space-100);
+}

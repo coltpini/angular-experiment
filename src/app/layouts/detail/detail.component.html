@@ -1,0 +1,15 @@
+<section class="container">
+  <a (click)="goBack()" class="back">back to list</a>
+  <div *ngIf="fly">
+    <h2>{{ fly.name }} - #{{fly.size}}</h2>
+    <img src="/assets/img/{{fly.id}}.jpg" alt="{{fly.name}}" />
+    <p>{{fly.note}}</p>
+    <p>{{fly.description}}</p>
+    <p>{{fly.material}}</p>
+    <ul>
+      <li class="tag" *ngFor="let tag of fly.tags">
+        <span>{{tag}}</span>
+      </li>
+    </ul>
+  </div>
+</section>

@@ -6,7 +6,6 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Fly } from './data/fly';
-import { MessageService } from './message.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,16 +16,23 @@ export class FlyService {
 
   private fliesUrl = 'api/flies'; 
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+  constructor(private http: HttpClient) { }
   
-  getFlies (): Observable<Fly[]> {
+  getFlies(): Observable<Fly[]> {
     return this.http.get<Fly[]>(this.fliesUrl)
       .pipe(
-        tap(flies => this.log(`fetched flies`)),
         catchError(this.handleError('getFlies', []))
       );
+  }
+
+  getTags(): Observable<string[]>{
+    return new Observable( observer => {
+      this.getFlies().subscribe(flies => {
+        let tags:string[] = flies.reduce( (a: string[], n: Fly) => [...a, ...n.tags], [])
+        //TODO: figure out why the observer is a subscriber object. It is different than the documentation.
+        observer.destination.next( tags.filter( (tag, i, arr) => arr.indexOf(tag) === i))
+      })
+    })
   }
 
   getFlyNo404<Data>(id: number): Observable<Fly> {
@@ -34,18 +40,13 @@ export class FlyService {
     return this.http.get<Fly[]>(url)
       .pipe(
         map(flies => flies[0]),
-        tap(f => {
-          const outcome = f ? `fetched` : `did not find`;
-          this.log(`${outcome} fly id=${id}`);
-        }),
         catchError(this.handleError<Fly>(`getFly id=${id}`))
       );
   }
 
-  getFly(id: number): Observable<Fly> {
+  getFly(id: string): Observable<Fly> {
     const url = `${this.fliesUrl}/${id}`;
     return this.http.get<Fly>(url).pipe(
-      tap(_ => this.log(`fetched fly id=${id}`)),
       catchError(this.handleError<Fly>(`getFly id=${id}`))
     );
   }
@@ -55,14 +56,12 @@ export class FlyService {
       return of([]);
     }
     return this.http.get<Fly[]>(`api/flies/?name=${term}`).pipe(
-      tap(_ => this.log(`found flies matching "${term}"`)),
       catchError(this.handleError<Fly[]>('searchFlies', []))
     );
   }
 
   addFly (fly: Fly): Observable<Fly> {
     return this.http.post<Fly>(this.fliesUrl, fly, httpOptions).pipe(
-      tap((fly: Fly) => this.log(`added fly w/ id=${fly.id}`)),
       catchError(this.handleError<Fly>('addFly'))
     );
   }
@@ -72,14 +71,12 @@ export class FlyService {
     const url = `${this.fliesUrl}/${id}`;
 
     return this.http.delete<Fly>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted fly id=${id}`)),
       catchError(this.handleError<Fly>('deleteFly'))
     );
   }
 
   updateFly (fly: Fly): Observable<any> {
     return this.http.put(this.fliesUrl, fly, httpOptions).pipe(
-      tap(_ => this.log(`updated fly id=${fly.id}`)),
       catchError(this.handleError<any>('updateFly'))
     );
   }
@@ -96,15 +93,8 @@ export class FlyService {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-  }
-
-  private log(message: string) {
-    this.messageService.add('FlyService: ' + message);
   }
 }

@@ -1,0 +1,54 @@
+.container {
+    display: grid;
+    grid-template-areas:    "top top top"
+                            "left main main";  
+    grid-template-columns: var(--space-400) 1fr 1fr;
+    grid-template-rows: var(--space-300) 1fr;    
+    
+    padding: var(--space-300);
+}
+
+app-fly-search {
+    grid-area: top;
+}
+article {
+    grid-area: main;
+}
+aside {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+}
+
+aside a {
+    padding: 1em;
+}
+
+aside a.active {
+    background: var(--color-200)
+}
+
+article ul {
+    display: grid;
+    grid-gap: 4em;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0;
+    margin: 0;
+}
+
+.fly {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.fly-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.fly-link span {
+    padding-top: 0.5em;
+}

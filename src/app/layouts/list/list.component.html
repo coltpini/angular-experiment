@@ -1,0 +1,17 @@
+<section class="container">
+  <app-fly-search></app-fly-search>
+  <article>
+    <ul>
+      <li *ngFor="let fly of flies" class="fly">
+        <a routerLink="/detail/{{fly.id}}" class="fly-link">
+          <img src="/assets/img/thumb/{{fly.id}}.jpg" alt="">
+          <span>{{fly.name}}</span>
+        </a>
+      </li>
+    </ul>
+  </article>
+  <aside>
+    <a routerLink="/list/all" routerLinkActive="active">All</a>
+    <a *ngFor="let tag of tags" routerLinkActive="active" routerLink="/list/{{tag}}">{{tag}}</a>
+  </aside>
+</section>

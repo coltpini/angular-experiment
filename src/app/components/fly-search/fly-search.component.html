@@ -1,7 +1,5 @@
 <div id="search-component">
-  <h4>Fly Search</h4>
-
-  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" placeholder="search" />
 
   <ul class="search-result">
     <li *ngFor="let fly of flies$ | async" >
