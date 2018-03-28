@@ -4,7 +4,8 @@
                             "left main main";  
     grid-template-columns: var(--space-400) 1fr 1fr;
     grid-template-rows: var(--space-300) 1fr;    
-    
+    grid-gap: var(--space-100);
+
     padding: var(--space-300);
 }
 
@@ -30,9 +31,10 @@ aside a.active {
 }
 
 article ul {
+    --columns: 2;
     display: grid;
-    grid-gap: 4em;
-    grid-template-columns: repeat(4, 1fr);
+    grid-gap: var(--space-100);
+    grid-template-columns: repeat(var(--columns), 1fr);
     padding: 0;
     margin: 0;
 }
@@ -49,6 +51,22 @@ article ul {
     justify-content: flex-start;
 }
 
+@media screen and (min-width: 76em) {
+    article ul {
+        --columns: 3;
+    }
+}
+
+@media screen and (min-width: 112em) {
+    article ul {
+        --columns: 4;
+    }
+}
+
+.fly-link img {
+    max-width: 100%;
+}
+
 .fly-link span {
-    padding-top: 0.5em;
+    padding: 0.5em 0 1em;
 }
