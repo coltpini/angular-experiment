@@ -29,8 +29,7 @@ export class FlyService {
     return new Observable( observer => {
       this.getFlies().subscribe(flies => {
         let tags:string[] = flies.reduce( (a: string[], n: Fly) => [...a, ...n.tags], [])
-        //TODO: figure out why the observer is a subscriber object. It is different than the documentation.
-        observer.destination.next( tags.filter( (tag, i, arr) => arr.indexOf(tag) === i))
+        observer.next( tags.filter( (tag, i, arr) => arr.indexOf(tag) === i))
       })
     })
   }
